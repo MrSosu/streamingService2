@@ -1,6 +1,7 @@
 package prodotti;
 
-import actors.Attore;
+import entities.Attore;
+import entities.Recensione;
 import enums.Genere;
 
 public class Prodotto {
@@ -11,6 +12,7 @@ public class Prodotto {
     protected Genere genere;
     protected boolean pg;
     protected boolean original;
+    protected Recensione[] recensioni;
 
     public Prodotto(String titolo, int anno, Attore[] cast, Genere genere, boolean pg, boolean original) {
         this.titolo = titolo;
@@ -22,6 +24,7 @@ public class Prodotto {
         this.genere = genere;
         this.pg = pg;
         this.original = original;
+        this.recensioni = new Recensione[1000];
     }
 
     public String getTitolo() {

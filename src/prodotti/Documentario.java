@@ -1,6 +1,6 @@
 package prodotti;
 
-import actors.Attore;
+import entities.Attore;
 import enums.Genere;
 import enums.GenereDocumentario;
 

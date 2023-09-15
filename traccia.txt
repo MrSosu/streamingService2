@@ -32,5 +32,6 @@ ATTENZIONE! Alcuni degli attributi indicati potrebbero essere ricondotti ad ulte
 
 PARTE 2:
     Aggiungere la funzionalità "La mia lista" che permette all'utente di memorizzare una lista personalizzata di prodotti da guardare;
-    Aggiungere la�possiblità ad un users.Utente di indicare se un prodotto gli piace o meno (si può anche decidere di fare una valutazione a stelle, da 1 a 5).
+    Aggiungere la è possiblità ad un users.Utente di indicare se un prodotto gli piace o meno (si può anche decidere di
+    fare una valutazione a stelle, da 1 a 5).
     Creare un metodo che, dato un genere (es. Azione, Horror, Commedia) o una categoria (prodotti.Film, Serie TV, prodotti.Documentario), restituisce una lista di prodotti di quel genere o di quella categoria;
