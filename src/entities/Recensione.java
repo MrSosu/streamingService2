@@ -52,4 +52,9 @@ public class Recensione {
     public void setCommento(String commento) {
         this.commento = commento;
     }
+
+    @Override
+    public String toString() {
+        return p.toString() + ", voto: " + voto;
+    }
 }

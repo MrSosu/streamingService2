@@ -1,6 +1,10 @@
 package users;
 
+import entities.Recensione;
 import prodotti.Prodotto;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Utente {
 
@@ -9,7 +13,7 @@ public class Utente {
     private boolean isKid;
     private String pin;
     private Account account;
-    private Prodotto[] miaLista;
+    private Set<Prodotto> miaLista;
 
     public Utente(String nome, String avatar, boolean isKid, String pin, Account account) {
         this.nome = nome;
@@ -17,7 +21,7 @@ public class Utente {
         this.isKid = isKid;
         this.pin = pin;
         this.account = account;
-        this.miaLista = new Prodotto[100];
+        this.miaLista = new LinkedHashSet<>();
     }
 
     public String getNome() {
@@ -60,40 +64,26 @@ public class Utente {
         this.account = account;
     }
 
-    public Prodotto[] getMiaLista() {
+    public Set<Prodotto> getMiaLista() {
         return miaLista;
     }
 
     public void addInMiaLista(Prodotto p) {
-        if (isPresentInLista(p)) throw new IllegalArgumentException("Il prodotto è già presente nella lista");
-        boolean flag = false;
-        for (int i = 0; i < miaLista.length; i++) {
-            if (miaLista[i] == null) {
-                miaLista[i] = p;
-                flag = true;
-            }
-        }
-        if (!flag) throw new IllegalArgumentException("La tua lista è piena!");
+        miaLista.add(p);
     }
 
     public void removeInMiaLista(Prodotto p) {
-        if (isPresentInLista(p)) {
-            for (int i = 0; i < miaLista.length; i++) {
-                if (miaLista[i] == p) {
-                    miaLista[i] = null;
-                }
-            }
+        if (!miaLista.contains(p)) {
+            System.out.println("ERRORE! elemento non presente");
         }
-        else throw new IllegalArgumentException("Il prodotto non è presente nella lista!");
+        else {
+            miaLista.remove(p);
+        }
     }
 
-    private boolean isPresentInLista(Prodotto p) {
-        for (int i = 0; i < miaLista.length; i++) {
-            if (p.equals(miaLista[i])) {
-                return true;
-            }
-        }
-        return false;
+    public void addRecensione(Prodotto p, int voto) {
+        Recensione r = new Recensione(this, p, voto);
+        p.addRecensione(r);
     }
 
 }

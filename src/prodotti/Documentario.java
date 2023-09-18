@@ -4,11 +4,13 @@ import entities.Attore;
 import enums.Genere;
 import enums.GenereDocumentario;
 
+import java.util.Set;
+
 public class Documentario extends Prodotto {
 
     private GenereDocumentario genereDocumentario;
 
-    public Documentario(String titolo, int anno, Attore[] cast, Genere genere, boolean pg, boolean original,
+    public Documentario(String titolo, int anno, Set<Attore> cast, Genere genere, boolean pg, boolean original,
                         GenereDocumentario genereDocumentario) {
         super(titolo, anno, cast, genere, pg, original);
         this.genereDocumentario = genereDocumentario;

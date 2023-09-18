@@ -4,17 +4,20 @@ import entities.Attore;
 import entities.Recensione;
 import enums.Genere;
 
-public class Prodotto {
+import java.util.HashSet;
+import java.util.Set;
+
+public abstract class Prodotto implements Comparable<Prodotto> {
 
     protected String titolo;
     protected int anno;
-    protected Attore[] cast;
+    protected Set<Attore> cast;
     protected Genere genere;
     protected boolean pg;
     protected boolean original;
-    protected Recensione[] recensioni;
+    protected Set<Recensione> recensioni;
 
-    public Prodotto(String titolo, int anno, Attore[] cast, Genere genere, boolean pg, boolean original) {
+    public Prodotto(String titolo, int anno, Set<Attore> cast, Genere genere, boolean pg, boolean original) {
         this.titolo = titolo;
         if (anno < 1900 || anno > 2023) {
             throw new IllegalArgumentException("anno non corretto");
@@ -24,7 +27,7 @@ public class Prodotto {
         this.genere = genere;
         this.pg = pg;
         this.original = original;
-        this.recensioni = new Recensione[1000];
+        this.recensioni = new HashSet<>();
     }
 
     public String getTitolo() {
@@ -41,14 +44,6 @@ public class Prodotto {
 
     public void setAnno(int anno) {
         this.anno = anno;
-    }
-
-    public Attore[] getCast() {
-        return cast;
-    }
-
-    public void setCast(Attore[] cast) {
-        this.cast = cast;
     }
 
     public Genere getGenere() {
@@ -73,5 +68,45 @@ public class Prodotto {
 
     public void setOriginal(boolean original) {
         this.original = original;
+    }
+
+    public Set<Attore> getCast() {
+        return cast;
+    }
+
+    public void setCast(Set<Attore> cast) {
+        this.cast = cast;
+    }
+
+    public Set<Recensione> getRecensioni() {
+        return recensioni;
+    }
+
+    public void setRecensioni(Set<Recensione> recensioni) {
+        this.recensioni = recensioni;
+    }
+
+    public void addRecensione(Recensione r) {
+        recensioni.add(r);
+    }
+
+    @Override
+    public int compareTo(Prodotto p) {
+        if (p == null) {
+            throw new NullPointerException("Il prodotto preso da fuori è null!");
+        }
+        // ordino i prodotti in catalogo prima in base all'anno d'uscita decrescente e in caso di stesso anno in
+        // ordine alfabetico
+        if (this.anno > p.anno) return -1;
+        else if (this.anno < p.anno) return 1;
+        else {
+            return this.titolo.compareTo(p.titolo); // questo perchè il compareTo delle stringhe funziona in ordine
+            // alfabetico
+        }
+    }
+
+    @Override
+    public String toString() {
+        return titolo + ", " + anno;
     }
 }

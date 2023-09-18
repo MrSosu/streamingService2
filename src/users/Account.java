@@ -2,19 +2,22 @@ package users;
 
 import enums.TipoOfferta;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Account {
 
     // attributi
     private String email;
     private String password;
     private TipoOfferta tipoOfferta;
-    private Utente[] utenti;
+    private Set<Utente> utenti;
 
     public Account(String email, String password, TipoOfferta tipoOfferta) {
         this.email = email;
         this.password = password;
         this.tipoOfferta = tipoOfferta;
-        this.utenti = new Utente[tipoOfferta.getnUtenti()];
+        this.utenti = new HashSet<>();
     }
 
     public String getEmail() {
@@ -41,34 +44,20 @@ public class Account {
         this.tipoOfferta = tipoOfferta;
     }
 
-    public Utente[] getUtenti() {
+    public Set<Utente> getUtenti() {
         return utenti;
     }
 
-    public void setUtenti(Utente[] utenti) {
+    public void setUtenti(Set<Utente> utenti) {
         this.utenti = utenti;
     }
 
     public void addUser(Utente u) {
-        boolean flag = false;
-        for (int i = 0; i < utenti.length; i++) {
-            if (utenti[i] == null) {
-                utenti[i] = u;
-                flag = true;
-            }
-        }
-        if (!flag) System.out.println("ERRORE! Numero massimo di utenti raggiunto");
+        utenti.add(u);
     }
 
     public void removeUser(Utente u) {
-        boolean flag = false;
-        for (int i = 0; i < utenti.length; i++) {
-            if (utenti[i] == u) {
-                utenti[i] = null;
-                flag = true;
-            }
-        }
-        if (!flag) System.out.println("L'utente da eliminare non è presente!");
+        utenti.remove(u);
     }
 
 }
